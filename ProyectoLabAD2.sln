@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoLabAD2", "ProyectoL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoLabAD2.Tests", "ProyectoLabAD2.Tests\ProyectoLabAD2.Tests.csproj", "{694B5B70-CC72-49BF-9964-6DDC373802CC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestResults", "TestResults", "{9584F366-4FDF-49CD-9B4A-8D947FD9675B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
