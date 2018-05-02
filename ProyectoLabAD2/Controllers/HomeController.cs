@@ -15,6 +15,7 @@ namespace ProyectoLabAD2.Controllers
 
         public ActionResult About()
         {
+            ViewData["Datos"] = "HOLA MUNDO !!!";
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -26,5 +27,6 @@ namespace ProyectoLabAD2.Controllers
 
             return View();
         }
+        
     }
 }
