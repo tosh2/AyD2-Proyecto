@@ -1,4 +1,12 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@{
+    String datos =null;
+    if (Session["nombre"]!=null && Session["cuenta"]!=null) {
+        String nombre = Session["nombre"].ToString();
+        String cuenta = Session["cuenta"].ToString();
+        datos = nombre + " - " + cuenta;
+    }
+}
+@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -16,7 +24,18 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Iniciar Sesion", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        @if (datos != null)
+        {
+            <li>@Html.ActionLink(@datos, "Profile", "Cuenta", routeValues: null, htmlAttributes: new { id = "profileLink" })</li>
+        }
+        @if (datos == null)
+        {
+            <li>@Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Iniciar Sesion", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Cerrar Sesion", "Logout", "Cuenta", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
     </ul>
 }

@@ -41,7 +41,7 @@ namespace ProyectoLabAD2.Models
             }
         }
 
-        public bool inicioSesionValido()
+        public String inicioSesionValido()
         {
             Get_Connection();
             try
@@ -53,20 +53,22 @@ namespace ProyectoLabAD2.Models
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    String nombres = reader.GetString(0);
+
                     reader.Close();
                     connection.Close();
-                    return true;
+                    return nombres;
                 }
                 else {
                     reader.Close();
                     connection.Close();
-                    return false;
+                    return null;
                 }
                 
             }
             catch (SqlException e) { }
 
-            return false;
+            return null;
         }
 
         public int crearCuenta() {

@@ -27,6 +27,13 @@ namespace ProyectoLabAD2.Controllers
 
             return View();
         }
-        
+
+        public ActionResult Sistema()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
     }
 }

@@ -17,11 +17,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Banco 8", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (Session["nombre"] != null && Session["cuenta"] != null)
+                {
+                    @Html.ActionLink("Banco 8", "Sistema", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    @if (Session["nombre"] == null && Session["cuenta"] == null)
+                    {
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    }
                     <li>@Html.ActionLink("Acerca De ...", "About", "Home")</li>
                     <!-- <li>@Html.ActionLink("Contact", "Contact", "Home")</li> -->
                 </ul>

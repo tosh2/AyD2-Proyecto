@@ -38,27 +38,44 @@ namespace ProyectoLabAD2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[System.Web.Http.HttpPost]
+        //[System.Web.Http.AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public ActionResult Login()
         {
             NameValueCollection nvc = Request.Form;
             CuentaModel nuevaCuenta = new CuentaModel();
             nuevaCuenta.Cuenta = nvc["numerocuenta"];
             nuevaCuenta.password = nvc["password"];
-            if (nuevaCuenta.inicioSesionValido())
+            string nombre = nuevaCuenta.inicioSesionValido();
+            if (nuevaCuenta.inicioSesionValido()!=null)
             {
 
                 //var result = await _signInManager.PasswordSignInAsync(model.Email,model.Password, model.RememberMe,     lockoutOnFailure: false);
+                Session["cuenta"]= nuevaCuenta.Cuenta;
+                Session["nombre"] = nombre;
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Sistema", "Home");
             }
             else
             {
 
             }
             return RedirectToAction("About", "Home");
+        }
+
+
+        public ActionResult Profile()
+        {
+            ViewBag.Message = "Perfil";
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["nombre"]= null;
+            Session["cuenta"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 
