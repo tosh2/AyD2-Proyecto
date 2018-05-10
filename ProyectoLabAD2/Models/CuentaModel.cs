@@ -5,6 +5,7 @@ using System.Web;
 
 using System.Configuration;
 using System.Data.SqlClient;
+using ProyectoLabAD2.Entidades;
 
 namespace ProyectoLabAD2.Models
 {
@@ -93,6 +94,37 @@ namespace ProyectoLabAD2.Models
             catch (SqlException e) { }
             return 0;
         }
+
+        public Usuario getProfile(String cuenta)
+        {
+            Get_Connection();
+            Usuario u=null;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO WHERE cuenta=@cuenta"
+                                                , connection);
+                cmd.Parameters.AddWithValue("@cuenta", cuenta);
+                //cmd.Parameters.AddWithValue("@password", password);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+
+                    u = new Usuario(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString());
+                    reader.Close();
+                    connection.Close();
+                }
+                else
+                {
+                    reader.Close();
+                    connection.Close();
+                    return null;
+                }
+
+            }
+            catch (SqlException e) { }
+            return u;
+        }
+
 
         public String Cuenta { get; set; }
         public String nombres { get; set; }

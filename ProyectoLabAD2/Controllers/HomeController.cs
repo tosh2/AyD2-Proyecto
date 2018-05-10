@@ -30,6 +30,10 @@ namespace ProyectoLabAD2.Controllers
 
         public ActionResult Sistema()
         {
+            if (Session["cuenta"] == null || Session["nombre"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.Message = "Your contact page.";
 
             return View();

@@ -1,4 +1,5 @@
-﻿using ProyectoLabAD2.Models;
+﻿using ProyectoLabAD2.Entidades;
+using ProyectoLabAD2.Models;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
@@ -67,7 +68,16 @@ namespace ProyectoLabAD2.Controllers
 
         public ActionResult Profile()
         {
+            if (Session["cuenta"]==null || Session["nombre"]==null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.Message = "Perfil";
+            string cuenta = Session["cuenta"].ToString();
+            CuentaModel nuevaCuenta = new CuentaModel();
+            Usuario perfil=nuevaCuenta.getProfile(cuenta);
+            //string password = Session["password"].ToString();
+            ViewData["perfil"] = perfil;
             return View();
         }
 

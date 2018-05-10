@@ -1,8 +1,47 @@
-﻿
+﻿@using ProyectoLabAD2.Entidades;
+
+@{ 
+    Usuario perfil = (Usuario)ViewData["perfil"];
+}
 
 <div class="container">
     <h1>Perfil</h1>
     <hr />
+    <table>
+        <tr>
+            <td>Cuenta:</td>
+            <td>@perfil.cuenta</td>
+        </tr>
+        <tr>
+            <td>Nombres:</td>
+            <td>@perfil.nombres</td>
+        </tr>
+        <tr>
+            <td>Apellidos:</td>
+            <td>@perfil.apellidos</td>
+        </tr>
+        <tr>
+            <td>DPI:</td>
+            <td>@perfil.dpi</td>
+        </tr>
+        <tr>
+            <td>Salda Inicial:</td>
+            <td>@perfil.saldoInicial</td>
+        </tr>
+        <tr>
+            <td>Correo:</td>
+            <td>@perfil.correo</td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>@perfil.password</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
 </div>
 
 
