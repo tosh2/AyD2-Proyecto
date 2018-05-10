@@ -68,7 +68,7 @@ namespace ProyectoLabAD2.Tests.Controllers
         {
             String cuenta = "201213402";
             String cuentaDestino = "1234";
-            Double cantidad = 300;
+            Double cantidad = 200;
             CuentaModel perfil = new CuentaModel();
             Boolean estado = perfil.transferir(cuenta,cuentaDestino,cantidad);
             Assert.AreEqual(estado,true);
