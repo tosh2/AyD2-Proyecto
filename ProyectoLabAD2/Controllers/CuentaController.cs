@@ -46,14 +46,14 @@ namespace ProyectoLabAD2.Controllers
         {
             NameValueCollection nvc = Request.Form;
             CuentaModel nuevaCuenta = new CuentaModel();
-            nuevaCuenta.Cuenta = nvc["numerocuenta"];
-            nuevaCuenta.password = nvc["password"];
-            string nombre = nuevaCuenta.inicioSesionValido();
-            if (nuevaCuenta.inicioSesionValido()!=null)
+            string cuenta = nvc["numerocuenta"].ToString();
+            string password = nvc["password"].ToString();
+            string nombre = nuevaCuenta.inicioSesionValido(cuenta,password);
+            if (nombre!=null)
             {
 
                 //var result = await _signInManager.PasswordSignInAsync(model.Email,model.Password, model.RememberMe,     lockoutOnFailure: false);
-                Session["cuenta"]= nuevaCuenta.Cuenta;
+                Session["cuenta"]= cuenta;
                 Session["nombre"] = nombre;
 
                 return RedirectToAction("Sistema", "Home");

@@ -11,7 +11,7 @@ namespace ProyectoLabAD2.Models
 {
     public class CuentaModel
     {
-        private String connectionString = ConfigurationManager.ConnectionStrings["MyLocalConnection"].ConnectionString;
+        private String connectionString = "Data Source=ASUS\\SQLEXPRESS;Initial Catalog=ad2-proyecto;Integrated Security=True";
         private SqlConnection connection;
         private bool connection_open;
 
@@ -42,14 +42,14 @@ namespace ProyectoLabAD2.Models
             }
         }
 
-        public String inicioSesionValido()
+        public String inicioSesionValido(String cuenta,String password)
         {
             Get_Connection();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT nombres, apellidos FROM USUARIO WHERE cuenta=@cuenta AND password=@password"
                                                 ,connection);
-                cmd.Parameters.AddWithValue("@cuenta",Cuenta);
+                cmd.Parameters.AddWithValue("@cuenta",cuenta);
                 cmd.Parameters.AddWithValue("@password", password);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -201,53 +201,31 @@ namespace ProyectoLabAD2.Models
                                                 , connection);
                 cmd.Parameters.AddWithValue("@cuenta", cuenta);
                 cmd.Parameters.AddWithValue("@cantidad", cantidad);
-                SqlDataReader reader = cmd.ExecuteReader();
-                reader.Close();
+                int estado = cmd.ExecuteNonQuery();
 
-                if (!reader.Read())
+                if (estado==0)
                 {
                     connection.Close();
                     return false;
                 }
-
                 cmd = new SqlCommand("Update USUARIO set saldoActual=saldoActual+@cantidad WHERE cuenta=@cuentaDestino"
                                                 , connection);
                 cmd.Parameters.AddWithValue("@cuentaDestino", cuentaDestino);
                 cmd.Parameters.AddWithValue("@cantidad", cantidad);
-                reader = cmd.ExecuteReader();
-                if (!reader.Read())
+                estado = cmd.ExecuteNonQuery();
+                if (estado==0)
                 {
                     connection.Close();
                     return false;
                 }
-                /*if (reader.Read())
-                {
-                    Double saldoActual = Double.Parse(reader.GetValue(0).ToString());
-
-                    reader.Close();
-                    connection.Close();
-                    if (saldoActual >= cantidad)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    reader.Close();
-                    connection.Close();
-                    return false;
-                }
-                */
-                reader.Close();
                 connection.Close();
                 return true;
             }
-            catch (SqlException e) { }
-            return false;
+            catch (SqlException e) {
+
+                return false;
+            }
+            
         }
 
 
@@ -259,30 +237,6 @@ namespace ProyectoLabAD2.Models
         public String correo { get; set; }
         public String password { get; set; }
 
-        /*
-        public CuentaModel obtenerInformacionCuenta() {
-            Get_Connection();
-
-            try {
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = connection;
-                cmd.CommandText = "SELECT * FROM USUARIO";
-                SqlDataReader reader = cmd.ExecuteReader();
-                reader.Read();
-
-                if (reader.IsDBNull(0) == false) {
-                    nombres = reader.GetString(1);
-                    Console.WriteLine(nombres);
-                }
-                reader.Close();
-
-            }
-            catch (SqlException e) { }
-
-            return null;
-        }
-        */
 
     }
 }
