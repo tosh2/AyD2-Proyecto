@@ -20,7 +20,7 @@ namespace ProyectoLabAD2.Controllers
 
         public AccountController()
         {
-            int 
+            
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
