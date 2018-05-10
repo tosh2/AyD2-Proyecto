@@ -99,6 +99,46 @@ namespace ProyectoLabAD2.Controllers
             ViewData["saldoActual"] = perfil.getSaldoActual(Session["cuenta"].ToString());
             return View();
         }
+
+        public ActionResult Transferencia()
+        {
+            if (Session["cuenta"] == null || Session["nombre"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        public ActionResult Transferir()
+        {
+            if (Session["cuenta"] == null || Session["nombre"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            NameValueCollection nvc = Request.Form;
+            string cuentaDestino=nvc["cuentaDestino"];
+            string cantidad= nvc["cantidad"];
+            CuentaModel perfil = new CuentaModel();
+            bool estado = perfil.transferible(Session["cuenta"].ToString(),double.Parse(cantidad));
+            if (estado)
+            {
+                bool exito = perfil.transferir(Session["cuenta"].ToString(),cuentaDestino,double.Parse(cantidad));
+                if (exito)
+                {
+                    ViewData["mensaje"] = "Se realizó la transferencia monetaria correctamente!";
+                }
+                else
+                {
+                    ViewData["mensaje"] = "Ha ocurrido un error al momento de hacer la transferencia";
+                }
+            }else
+            {
+                ViewData["mensaje"] = "Ha ocurrido un error al momento de hacer la transferencia";
+            }
+            return View("Transferencia");
+        }
     }
 
 }

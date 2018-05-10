@@ -146,12 +146,108 @@ namespace ProyectoLabAD2.Models
                 {
                     reader.Close();
                     connection.Close();
-                    return 0;
+                    return -1;
                 }
 
             }
             catch (SqlException e) { }
             return saldoActual;
+        }
+
+
+
+        public Boolean transferible(String cuenta,Double cantidad)
+        {
+            Get_Connection();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT SaldoActual FROM USUARIO WHERE cuenta=@cuenta"
+                                                , connection);
+                cmd.Parameters.AddWithValue("@cuenta", cuenta);
+                //cmd.Parameters.AddWithValue("@password", password);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    Double saldoActual = Double.Parse(reader.GetValue(0).ToString());
+                    
+                    reader.Close();
+                    connection.Close();
+                    if (saldoActual >= cantidad)
+                    {
+                        return true;
+                    }else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    reader.Close();
+                    connection.Close();
+                    return false;
+                }
+
+            }
+            catch (SqlException e) { }
+            return false;
+        }
+
+        public Boolean transferir(String cuenta,String cuentaDestino, Double cantidad)
+        {
+            Get_Connection();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("Update USUARIO set saldoActual=saldoActual-@cantidad WHERE cuenta=@cuenta"
+                                                , connection);
+                cmd.Parameters.AddWithValue("@cuenta", cuenta);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+
+                if (!reader.Read())
+                {
+                    connection.Close();
+                    return false;
+                }
+
+                cmd = new SqlCommand("Update USUARIO set saldoActual=saldoActual+@cantidad WHERE cuenta=@cuentaDestino"
+                                                , connection);
+                cmd.Parameters.AddWithValue("@cuentaDestino", cuentaDestino);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                reader = cmd.ExecuteReader();
+                if (!reader.Read())
+                {
+                    connection.Close();
+                    return false;
+                }
+                /*if (reader.Read())
+                {
+                    Double saldoActual = Double.Parse(reader.GetValue(0).ToString());
+
+                    reader.Close();
+                    connection.Close();
+                    if (saldoActual >= cantidad)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    reader.Close();
+                    connection.Close();
+                    return false;
+                }
+                */
+                reader.Close();
+                connection.Close();
+                return true;
+            }
+            catch (SqlException e) { }
+            return false;
         }
 
 

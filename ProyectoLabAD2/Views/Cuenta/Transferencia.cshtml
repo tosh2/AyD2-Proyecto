@@ -1,0 +1,20 @@
+﻿<div class="container">
+    <h1>Transferencia monetaria</h1>
+    <hr />
+    <form  method="POST" action="/Cuenta/Transferir">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Transferir a la cuenta:</label>
+            <input name="cuentaDestino" required type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No. Cuenta">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Cantidad</label>
+            <input name="cantidad" type="number" class="form-control" id="exampleInputPassword1" placeholder="Cantidad">
+        </div>
+        <button type="submit" class="btn btn-primary" required>Transferir</button>
+        <br />
+        @if (ViewData["mensaje"] != null)
+        {
+            <label style="color:red;">@ViewData["mensaje"]</label>
+        }
+    </form>
+</div>
