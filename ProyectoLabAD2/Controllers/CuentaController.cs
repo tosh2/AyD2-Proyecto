@@ -87,6 +87,18 @@ namespace ProyectoLabAD2.Controllers
             Session["cuenta"] = null;
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Saldo()
+        {
+            if (Session["cuenta"] == null || Session["nombre"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            CuentaModel perfil = new CuentaModel();
+            ViewData["saldoActual"] = perfil.getSaldoActual(Session["cuenta"].ToString());
+            return View();
+        }
     }
 
 }

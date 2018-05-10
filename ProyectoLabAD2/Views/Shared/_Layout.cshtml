@@ -28,6 +28,10 @@
                     {
                         <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     }
+                    else
+                    {
+                        <li>@Html.ActionLink("Consultar saldo", "Saldo", "Cuenta")</li>
+                    }
                     <li>@Html.ActionLink("Acerca De ...", "About", "Home")</li>
                     <!-- <li>@Html.ActionLink("Contact", "Contact", "Home")</li> -->
                 </ul>

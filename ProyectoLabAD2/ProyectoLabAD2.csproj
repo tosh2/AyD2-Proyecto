@@ -254,6 +254,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Cuenta\Profile.cshtml" />
     <Content Include="Views\Home\Sistema.cshtml" />
+    <Content Include="Views\Cuenta\Saldo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

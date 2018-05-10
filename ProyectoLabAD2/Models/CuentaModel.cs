@@ -125,6 +125,35 @@ namespace ProyectoLabAD2.Models
             return u;
         }
 
+        public Double getSaldoActual(String cuenta)
+        {
+            Get_Connection();
+            Double saldoActual = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT SaldoActual FROM USUARIO WHERE cuenta=@cuenta"
+                                                , connection);
+                cmd.Parameters.AddWithValue("@cuenta", cuenta);
+                //cmd.Parameters.AddWithValue("@password", password);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    saldoActual = Double.Parse(reader.GetValue(0).ToString());
+                    reader.Close();
+                    connection.Close();
+                }
+                else
+                {
+                    reader.Close();
+                    connection.Close();
+                    return 0;
+                }
+
+            }
+            catch (SqlException e) { }
+            return saldoActual;
+        }
+
 
         public String Cuenta { get; set; }
         public String nombres { get; set; }
