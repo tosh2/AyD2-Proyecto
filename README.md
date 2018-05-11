@@ -6,3 +6,5 @@ Analisis y Diseño de Sistemas 2 - Proyecto de Laboratorio (Integracion Continua
 - Chepe
 - Wilder (Sigu)
 - Daniel
+
+Calificacion 11/05/2018
