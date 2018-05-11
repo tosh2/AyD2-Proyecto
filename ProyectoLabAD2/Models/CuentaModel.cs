@@ -11,7 +11,7 @@ namespace ProyectoLabAD2.Models
 {
     public class CuentaModel
     {
-        private String connectionString = "Data Source=ASUS\\SQLEXPRESS;Initial Catalog=ad2-proyecto;Integrated Security=True";
+        private String connectionString = "Data Source=TOSH-PC;Initial Catalog=ad2-proyecto;Integrated Security=True";
         private SqlConnection connection;
         private bool connection_open;
 
@@ -80,12 +80,13 @@ namespace ProyectoLabAD2.Models
                 cmd.Connection = connection;
                 cmd.CommandText = "INSERT INTO USUARIO "
                                     +" VALUES(@cuenta, @nombres, @apellidos, @dpi, @saldoinicial,"
-                                    +"@correo, @password);";
+                                    +"@correo, @password,@saldoactual);";
                 cmd.Parameters.AddWithValue("@cuenta", this.Cuenta);
                 cmd.Parameters.AddWithValue("@nombres", this.nombres);
                 cmd.Parameters.AddWithValue("@apellidos", this.apellidos);
                 cmd.Parameters.AddWithValue("@dpi", this.dpi);
                 cmd.Parameters.AddWithValue("@saldoinicial", this.saldoInicial);
+                cmd.Parameters.AddWithValue("@saldoactual", this.saldoInicial);
                 cmd.Parameters.AddWithValue("@correo", this.correo);
                 cmd.Parameters.AddWithValue("@password", this.password);
                 cmd.ExecuteNonQuery();

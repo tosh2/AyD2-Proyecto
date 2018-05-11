@@ -55,8 +55,8 @@ namespace ProyectoLabAD2.Tests.Controllers
         [TestMethod]
         public void testTransferencia()
         {
-            String cuenta="201213402";
-            Double cantidad=20000;
+            String cuenta="1";
+            Double cantidad=1;
             CuentaModel perfil = new CuentaModel();
             Boolean estado = perfil.transferible(cuenta,cantidad);
             Assert.AreEqual(estado, true);
@@ -66,8 +66,8 @@ namespace ProyectoLabAD2.Tests.Controllers
         [TestMethod]
         public void testUserTransferencia()
         {
-            String cuenta = "201213402";
-            String cuentaDestino = "1234";
+            String cuenta = "2";
+            String cuentaDestino = "1";
             Double cantidad = 200;
             CuentaModel perfil = new CuentaModel();
             Boolean estado = perfil.transferir(cuenta,cuentaDestino,cantidad);
@@ -77,8 +77,8 @@ namespace ProyectoLabAD2.Tests.Controllers
         [TestMethod]
         public void testLogin()
         {
-            String cuenta = "201213402";
-            String password = "201213402";
+            String cuenta = "1111";
+            String password = "jdis123";
             CuentaModel perfil = new CuentaModel();
             String dato = perfil.inicioSesionValido(cuenta,password);
             Assert.AreNotEqual(dato,null);
